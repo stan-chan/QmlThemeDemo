@@ -14,7 +14,6 @@ find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 qt_add_executable(appQmlThemeDemo
     ${CPP_FILES}
     ./Resource.qrc
-
 )
 file(GLOB_RECURSE QmlFiles *.qml)
 
@@ -44,8 +43,8 @@ qt_add_qml_module(appQmlThemeDemo
         ${IMGFiles}
 )
 # 无效
-#list(APPEND QML_DIRS "qrc:/Resources")
-#set(QML_IMPORT_PATH "${QML_DIRS}" CACHE STRING "")
+list(APPEND QML_DIRS "qrc:/")
+set(QML_IMPORT_PATH "${QML_DIRS}" CACHE STRING "")
 
 set_target_properties(appQmlThemeDemo PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
