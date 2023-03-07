@@ -29,7 +29,6 @@ Window {
             {
                 ThemeManager.theme = OneDark;
             }
-
         }
     }
 }

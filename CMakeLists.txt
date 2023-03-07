@@ -4,18 +4,29 @@ project(QmlThemeDemo VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# 获取添加.cpp与.h文件
-file(GLOB_RECURSE CPP_FILES *.cpp *.h)
 
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
+#include_directories(./ ./Resources/Themes)
+#add_subdirectory(Resources/Themes)
+#set(CPP_FILES
+#    main.cpp
+#)
+# 获取添加.cpp与.h文件
+# 尽量不要用GLOB_RECURSE,可能在Visual Studio中调试时添加自动生成的.cpp，触发报错
+file(GLOB SRC_LIST *.cpp *.h)
+
 qt_add_executable(appQmlThemeDemo
-    ${CPP_FILES}
+#    ${CPP_FILES}
+    ${SRC_LIST}
     ./Resource.qrc
 )
-file(GLOB_RECURSE QmlFiles *.qml)
+file(GLOB QmlFiles
+    "Resources/Themes/*.qml"
+)
+#file(GLOB_RECURSE QmlFiles *.qml)
 
 foreach(element ${QmlFiles})
     string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" qmlfile ${element})
@@ -38,7 +49,8 @@ qt_add_qml_module(appQmlThemeDemo
     URI QmlThemeDemo
     VERSION 1.0
     QML_FILES
-        ${QMLFiles}
+        main.qml
+#        ${QMLFiles}
     RESOURCES
         ${IMGFiles}
 )
