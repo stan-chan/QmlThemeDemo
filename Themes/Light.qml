@@ -1,9 +1,8 @@
 pragma Singleton
 
 import QtQuick
-
 ThemeBase {
 
-    foreground: "red"
+    foreground: "#1296db"
     background: "#FFFFFF"
 }

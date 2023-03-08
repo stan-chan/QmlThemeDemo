@@ -9,56 +9,29 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
-#include_directories(./ ./Resources/Themes)
-#add_subdirectory(Resources/Themes)
-#set(CPP_FILES
-#    main.cpp
-#)
-# 获取添加.cpp与.h文件
-# 尽量不要用GLOB_RECURSE,可能在Visual Studio中调试时添加自动生成的.cpp，触发报错
-file(GLOB SRC_LIST *.cpp *.h)
-
-qt_add_executable(appQmlThemeDemo
-#    ${CPP_FILES}
-    ${SRC_LIST}
-    ./Resource.qrc
+qt_add_executable(QmlThemeDemo
+    main.cpp
 )
-file(GLOB QmlFiles
-    "Resources/Themes/*.qml"
+
+set(resource_files
+    "main.qml"
+
+    "Themes/Light.qml"
+    "Themes/Dark.qml"
+    "Themes/OneDark.qml"
+    "Themes/ThemeBase.qml"
+    "Themes/ThemeManager.qml"
+    "Themes/qmldir"
 )
-#file(GLOB_RECURSE QmlFiles *.qml)
 
-foreach(element ${QmlFiles})
-    string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" qmlfile ${element})
-    list(APPEND QMLFiles ${qmlfile})
-endforeach(element)
-# 去重
-list(REMOVE_DUPLICATES QMLFiles)
-
-# 获取添加.qml文件
-file(GLOB_RECURSE ImgFiles *.png *.svg *.jpg)
-# 将QmlFiles列表中各元素的绝对路径更改为相对路径
-foreach(element ${ImgFiles})
-    string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" imgfile ${element})
-    list(APPEND IMGFiles ${imgfile})
-endforeach(element)
-# 去重
-list(REMOVE_DUPLICATES IMGFiles)
-
-qt_add_qml_module(appQmlThemeDemo
-    URI QmlThemeDemo
-    VERSION 1.0
-    QML_FILES
-        main.qml
-#        ${QMLFiles}
-    RESOURCES
-        ${IMGFiles}
+qt_add_resources(QmlThemeDemo "QmlThemeDemo"
+    PREFIX
+        "/"
+    FILES
+        ${resource_files}
 )
-# 无效
-list(APPEND QML_DIRS "qrc:/")
-set(QML_IMPORT_PATH "${QML_DIRS}" CACHE STRING "")
 
-set_target_properties(appQmlThemeDemo PROPERTIES
+set_target_properties(QmlThemeDemo PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -66,9 +39,9 @@ set_target_properties(appQmlThemeDemo PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(appQmlThemeDemo
+target_link_libraries(QmlThemeDemo
     PRIVATE Qt6::Quick)
 
-install(TARGETS appQmlThemeDemo
+install(TARGETS QmlThemeDemo
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})

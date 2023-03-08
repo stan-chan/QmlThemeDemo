@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
-import Resources.Themes 1.0
+import "./Themes"
+
 Window {
     width: 640
     height: 480
@@ -21,11 +22,11 @@ Window {
         x:300;y:50
         text: qsTr("Switch")
         onClicked: {
-            if(ThemeManager.theme === OneDark)
+            if(ThemeManager.theme == OneDark)
             {
                 ThemeManager.theme = Light;
             }
-            else if(ThemeManager.theme === Light)
+            else if(ThemeManager.theme == Light)
             {
                 ThemeManager.theme = OneDark;
             }

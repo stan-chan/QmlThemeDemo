@@ -1,6 +1,0 @@
-module Resources.Themes
-ThemeBase 1.0 qrc:/Resources/Themes/ThemeBase.qml
-singleton Dark 1.0 qrc:/Resources/Themes/Dark.qml
-singleton Light 1.0 qrc:/Resources/Themes/Light.qml
-singleton OneDark 1.0 qrc:/Resources/Themes/OneDark.qml
-singleton ThemeManager 1.0 qrc:/Resources/Themes/ThemeManager.qml
