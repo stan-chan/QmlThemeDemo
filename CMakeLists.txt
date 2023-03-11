@@ -9,8 +9,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
+set(src_files
+    "xml_helper.h"
+    "xml_helper.cpp"
+    "tinyxml2.h"
+    "tinyxml2.cpp"
+)
 qt_add_executable(QmlThemeDemo
     main.cpp
+    ${src_files}
 )
 
 set(resource_files

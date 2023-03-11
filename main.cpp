@@ -1,11 +1,13 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "xml_helper.h"
 
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
+    qmlRegisterType<XmlHelper>("XmlHelper",1,0,"XmlHelper");
     QQmlApplicationEngine engine;
 //    engine.addImportPath("qrc:/");
     const QUrl url(u"qrc:/main.qml"_qs);
@@ -16,5 +18,7 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
+    XmlHelper xml;
+//    xml.ReadXml();
     return app.exec();
 }

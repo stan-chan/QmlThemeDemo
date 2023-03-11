@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import XmlHelper 1.0
 import "./Themes"
 
 Window {
@@ -16,12 +17,18 @@ Window {
         color:ThemeManager.theme.background
     }
 
+    XmlHelper{
+        id:xmlID
+        ip:"12"
+    }
+
     Button{
         width:100
         height:30
         x:300;y:50
-        text: qsTr("Switch")
+        text: xmlID.ip
         onClicked: {
+            xmlID.readXml();
             if(ThemeManager.theme == OneDark)
             {
                 ThemeManager.theme = Light;
